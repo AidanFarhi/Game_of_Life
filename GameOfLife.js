@@ -29,6 +29,7 @@ class GameOfLife {
     return cell
   }
 
+  // set 1 for alive 0 for dead
   setCell(val, row, col) {
     let board = this.board
     board[row][col] = val
@@ -51,6 +52,75 @@ class GameOfLife {
 
   livingNeighbors(row, col) {
     // TODO: Return the count of living neighbors.
+    // make a count of neighbors and get an array of
+    // the position of the neighbor
+
+    // arr[i][i] // self
+    // arr[i][i + 1] // right
+    // arr[i][i - 1] // left
+    // arr[i - 1][i] // top
+    // arr[i - 1][i - 1] // top left
+    // arr[i - 1][i + 1] // top right
+    // arr[i + 1][i] // bottom
+    // arr[i + 1][i + 1] // bottom right
+    // arr[i + 1][i - 1] // bottom left
+
+    let neighbors = {
+      right: {
+        pos: [row, col + 1],
+        val: this.board[row][col + 1]
+      },
+      left: {
+        pos: [row, col - 1],
+        val: this.board[row][col - 1]
+      },
+      top: {
+        pos: [row - 1, col],
+        val: this.board[row - 1][col]
+      },
+      bottom: {
+        pos: [row + 1, col],
+        val: this.board[row + 1][col]
+      },
+      topRight: {
+        pos: [row - 1, col + 1],
+        val: this.board[row - 1][col + 1]
+      },
+      bottomRight: {
+        pos: [row + 1, col + 1],
+        val: this.board[row + 1][col + 1]
+      },
+      topLeft: {
+        pos: [row - 1, col - 1],
+        val: this.board[row - 1][col - 1]
+      },
+      bottomLeft: {
+        pos: [row + 1, col - 1],
+        val: this.board[row + 1][col - 1]
+      }
+    }
+
+    //  now we make an array of our valid neighbors and their coordinates
+    //  this will be an array of neighbor objects and their respective positions
+    //  and values
+
+    let filtered = []
+    for (let posish in neighbors) {
+      let position = neighbors[posish]
+      let push = true
+      for (let item in position) {
+        // this is an array
+        let pos = item.pos   
+        if (pos[0] === 'undefined' || pos[1] === 'undefined') {
+          push = false
+        }
+      }
+      if (push) {
+        filtered.push(posish)
+      }
+    }
+    // this should give the count of alive neighbors
+    return filtered.length
   }
 
   /**
@@ -63,6 +133,8 @@ class GameOfLife {
     // on the existing board and determine, based on it's neighbors,
     // whether the cell should be dead or alive in the new board
     // (the next iteration of the game)
+    
+
     //
     // You need to:
     // 1. Count alive neighbors for all cells
