@@ -3,13 +3,27 @@ class GameOfLife {
     this.width = width;
     this.height = height;
     this.board = this.makeBoard();
+    this.getCell = this.getCell()
   }
 
   /**
    * Returns a 2D Array
    */
 
-  makeBoard() {
+  makeBoard(height, width) {
+
+    height = this.height
+    width = this.width
+    let arr = []
+    for (let i = 0; i < height; i++) {
+      let row = []
+      for (let j = 0; j < width; j++) {
+        row.push(0)
+      }
+      arr.push(row)
+    }
+
+    return arr
     // TODO: Create and return an 2D Array
     // with `this.heigh` as rows and `this.width` as cols.
     // For example, given a height of 4 and a width of 3, it will generate:
@@ -19,6 +33,11 @@ class GameOfLife {
     //  [0, 0, 0],
     //  [0, 0, 0],
     // ]
+  }
+
+  getCell(row, col) {
+    cell = this.arr[row][col]
+    return cell
   }
 
   /**
