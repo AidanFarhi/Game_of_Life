@@ -100,27 +100,23 @@ class GameOfLife {
       }
     }
 
-    //  now we make an array of our valid neighbors and their coordinates
+    //  now we make an array of our valid neighbors
     //  this will be an array of neighbor objects and their respective positions
     //  and values
 
-    let filtered = []
+    let alive = 0
     for (let posish in neighbors) {
       let position = neighbors[posish]
-      let push = true
       for (let item in position) {
         // this is an array
-        let pos = item.pos   
-        if (pos[0] === 'undefined' || pos[1] === 'undefined') {
-          push = false
+        let state = item.value  
+        if (state === 1) {
+          alive++
         }
-      }
-      if (push) {
-        filtered.push(posish)
       }
     }
     // this should give the count of alive neighbors
-    return filtered.length
+    return alive
   }
 
   /**
@@ -133,8 +129,21 @@ class GameOfLife {
     // on the existing board and determine, based on it's neighbors,
     // whether the cell should be dead or alive in the new board
     // (the next iteration of the game)
-    
-
+    let board = this.board
+    for (let k = 0; k < board.length; k++) {
+      let row = board[k]
+      for (let l = 0; l = row.length; l++) {
+        let col = row[l]
+        let neighborCount = livingNeighbors(row, col)
+        if (neighborCount > 3) {
+          newBoard[row][col] = 0
+        } else if (neighborCount < 2) {
+          newBoard[row][col] = 0
+        } else if (neighborCount > 1 && neighborCount < 4) {
+          newBoard[row][col] = 1
+        }
+      }
+    }
     //
     // You need to:
     // 1. Count alive neighbors for all cells
