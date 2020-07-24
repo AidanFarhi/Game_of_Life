@@ -29,14 +29,20 @@ class GameOfLife {
     return cell
   }
 
-  // set 1 for alive 0 for dead
+  /**
+   * Manual cell value edit. Takes (value, row, col).
+   */
+  
   setCell(val, row, col) {
     let board = this.board
     board[row][col] = val
     console.log(board)
   }
 
-  // 1 = 'alive' 0 = 'dead'
+  /**
+   * Toggles cell from 0 to 1 OR 1 to 0.
+   */
+  
   toggleCell(row, col) {
     let board = this.board
     if (board[row][col] === 0) {
@@ -53,16 +59,16 @@ class GameOfLife {
   livingNeighbors(r, c) {
     let count = 0
     let arr = this.board
-    console.log('board coming in:', arr)
-    console.log('typeof arr[r - 1]', typeof arr[r - 1])
-    console.log('typeof arr[c - 1]', typeof arr[c - 1])
-    console.log('arr[r]', arr[r])
-    console.log('arr[r][c]', arr[r][c])
-    console.log('arr[r][c + 1]', arr[r][c + 1])
+    // console.log('board coming in:', arr)
+    // console.log('typeof arr[r - 1]', typeof arr[r - 1])
+    // console.log('typeof arr[c - 1]', typeof arr[c - 1])
+    // console.log('arr[r]', arr[r])
+    // console.log('arr[r][c]', arr[r][c])
+    // console.log('arr[r][c + 1]', arr[r][c + 1])
 
     if (!arr[r - 1] && !arr[c - 1]) {
       if (arr[r][c + 1] === 1) {
-        console.log('hit')
+        // console.log('hit')
         count++
       }
       if (arr[r + 1][c] === 1) {
@@ -188,7 +194,7 @@ class GameOfLife {
       }
       return count
     }
-
+    // any cell with 8 neighbors
     if (arr[r][c - 1] === 1) {
       count++
     }
@@ -213,9 +219,7 @@ class GameOfLife {
     if (arr[r + 1][c + 1] === 1) {
       count++
     }
-
     return count
-
   }
 
   /**
@@ -234,15 +238,18 @@ class GameOfLife {
       let row = board[k]
       for (let l = 0; l < row.length; l++) {
         let col = row[l]
+        console.log('row in tick function:', row)
+        console.log('column in tick function:', col)
+        console.log('cell value:', board[k][l])
         let neighborCount = this.livingNeighbors(k, l)
         console.log('this is the neighbor count, line 238:', neighborCount)
-        if (neighborCount > 3 && board[row][col] === 1) {
+        if (neighborCount > 3 && board[k][l] === 1) {
           newBoard[k][l] = 0
-        } else if (neighborCount < 2) {
+        } else if (neighborCount < 2 && board) {
           newBoard[k][l] = 0
         } else if (neighborCount > 1 && neighborCount < 4) {
           newBoard[k][l] = 1
-        } else if (neighborCount > 3 && board[row][col] === 0) {
+        } else if (neighborCount > 3 && board[k][l] === 0) {
           newBoard[k][l] = 1
         }
       }
