@@ -59,16 +59,8 @@ class GameOfLife {
   livingNeighbors(r, c) {
     let count = 0
     let arr = this.board
-    // console.log('board coming in:', arr)
-    // console.log('typeof arr[r - 1]', typeof arr[r - 1])
-    // console.log('typeof arr[c - 1]', typeof arr[c - 1])
-    // console.log('arr[r]', arr[r])
-    // console.log('arr[r][c]', arr[r][c])
-    // console.log('arr[r][c + 1]', arr[r][c + 1])
-
     if (!arr[r - 1] && !arr[c - 1]) {
       if (arr[r][c + 1] === 1) {
-        // console.log('hit')
         count++
       }
       if (arr[r + 1][c] === 1) {
@@ -228,36 +220,27 @@ class GameOfLife {
 
   tick() {
     const newBoard = this.makeBoard();
-    // TODO: Here is where you want to loop through all the cells
-    // on the existing board and determine, based on it's neighbors,
-    // whether the cell should be dead or alive in the new board
-    // (the next iteration of the game)
-    console.log('line 194 newBoard:', newBoard)
     let board = this.board
     for (let k = 0; k < board.length; k++) {
       let row = board[k]
       for (let l = 0; l < row.length; l++) {
         let col = row[l]
-        console.log('row in tick function:', row)
-        console.log('column in tick function:', col)
-        console.log('cell value:', board[k][l])
         let neighborCount = this.livingNeighbors(k, l)
-        console.log('this is the neighbor count, line 238:', neighborCount)
         if (neighborCount > 3 && board[k][l] === 1) {
           newBoard[k][l] = 0
+          continue
         } else if (neighborCount < 2 && board) {
           newBoard[k][l] = 0
+          continue
         } else if (neighborCount > 1 && neighborCount < 4) {
           newBoard[k][l] = 1
+          continue
         } else if (neighborCount > 3 && board[k][l] === 0) {
           newBoard[k][l] = 1
+          continue
         }
       }
     }
-    // You need to:
-    // 1. Count alive neighbors for all cells
-    // 2. Set the next state of all cells in newBoard,
-    // based on their current alive neighbors
     this.board = newBoard;
   }
 }
