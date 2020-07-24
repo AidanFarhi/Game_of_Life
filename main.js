@@ -52,12 +52,6 @@ const paint = () => {
       }
     })
   });
-  // TODO:
-  //   1. For each <td> in the table:
-  //     a. If its corresponding cell in gol instance is alive,
-  //        give the <td> the `alive` CSS class.
-  //     b. Otherwise, remove the `alive` class.
-  //
 };
 
 paint()
@@ -87,10 +81,15 @@ document.getElementById('step_btn').addEventListener('click', (click) => {
     gol.tick()
     paint()
   }
-  // TODO: Do one gol tick and paint
 });
 
-document.getElementById('play_btn').addEventListener('click', (event) => {
+document.getElementById('play_btn').addEventListener('click', (click) => {
+  if (click.target.matches('#play_btn')) {
+    setInterval(() => {
+      gol.tick()
+      paint()
+    }, 1000);
+  }
   // TODO: Start playing by calling `tick` and paint
   // repeatedly every fixed time interval.
   // HINT:
