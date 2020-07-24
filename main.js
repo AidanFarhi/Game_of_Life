@@ -3,7 +3,6 @@ const height = 20;
 /**
  * Create a Game of Life instance
  */
-
 const gol = new GameOfLife(width, height);
 
 /**
@@ -59,12 +58,6 @@ const paint = () => {
   //        give the <td> the `alive` CSS class.
   //     b. Otherwise, remove the `alive` class.
   //
-  // To find all the <td>s in the table, you might query the DOM for them, or you
-  // could choose to collect them when we create them in createTable.
-  //
-  // HINT:
-  //   https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
-  //   https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName
 };
 
 paint()
@@ -73,7 +66,19 @@ paint()
  * Event Listeners
  */
 
-document.getElementById('board').addEventListener('click', (event) => {
+document.getElementById('board').addEventListener('click', (click) => {
+  if (click.target.matches('td')) {
+    let cell = click.target
+    let row = cell.dataset.row
+    let col = cell.dataset.col
+    let status = gol.getCell(row, col)
+    if (status === 1) {
+      gol.setCell(0, row, col)
+    } else {
+      gol.setCell(1, row, col)
+    }
+  }
+  paint()
   // TODO: Toggle clicked cell (event.target) and paint
 });
 

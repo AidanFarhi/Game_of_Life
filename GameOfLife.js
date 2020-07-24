@@ -22,6 +22,9 @@ class GameOfLife {
     }
     return arr
   }
+  /**
+   * returns a number, the number being the cells current value.
+   */
 
   getCell(row, col) {
     let board = this.board
