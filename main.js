@@ -83,17 +83,15 @@ document.getElementById('step_btn').addEventListener('click', (click) => {
   }
 });
 
+let play = false
 document.getElementById('play_btn').addEventListener('click', (click) => {
-  if (click.target.matches('#play_btn')) {
+  if (click.target.matches('#play_btn') && !play) {
+    play = true
     setInterval(() => {
       gol.tick()
       paint()
-    }, 1000);
+    }, 700);
   }
-  // TODO: Start playing by calling `tick` and paint
-  // repeatedly every fixed time interval.
-  // HINT:
-  // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval
 });
 
 document.getElementById('random_btn').addEventListener('click', (event) => {
