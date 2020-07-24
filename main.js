@@ -116,4 +116,16 @@ document.getElementById('random_btn').addEventListener('click', (click) => {
 
 document.getElementById('clear_btn').addEventListener('click', (click) => {
   // TODO: Clear the board and paint
+  if (click.target.matches('#clear_btn')) {
+    let rows = Array.from(document.getElementsByTagName('tr'))
+    rows.forEach(element => {
+      let tdArray = Array.from(element.getElementsByTagName('td'))
+      tdArray.forEach(td => {
+        let row = td.dataset.row
+        let col = td.dataset.col
+        gol.setCell(0, row, col)
+      })
+    });
+  }
+  paint()
 });
