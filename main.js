@@ -94,10 +94,26 @@ document.getElementById('play_btn').addEventListener('click', (click) => {
   }
 });
 
-document.getElementById('random_btn').addEventListener('click', (event) => {
-  // TODO: Randomize the board and paint
+function getOneOrZero() {
+  return Math.floor(Math.random() * Math.floor(2));
+}
+
+document.getElementById('random_btn').addEventListener('click', (click) => {
+  if (click.target.matches('#random_btn')) {
+    let rows = Array.from(document.getElementsByTagName('tr'))
+    rows.forEach(element => {
+      let tdArray = Array.from(element.getElementsByTagName('td'))
+      tdArray.forEach(td => {
+        let value = getOneOrZero()
+        let row = td.dataset.row
+        let col = td.dataset.col
+        gol.setCell(value, row, col)
+      })
+    });
+  }
+  paint()
 });
 
-document.getElementById('clear_btn').addEventListener('click', (event) => {
+document.getElementById('clear_btn').addEventListener('click', (click) => {
   // TODO: Clear the board and paint
 });
