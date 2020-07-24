@@ -224,18 +224,18 @@ class GameOfLife {
     for (let k = 0; k < board.length; k++) {
       let row = board[k]
       for (let l = 0; l < row.length; l++) {
-        let col = row[l]
         let neighborCount = this.livingNeighbors(k, l)
-        if (neighborCount > 3 && board[k][l] === 1) {
+        let cell = board[k][l]
+        if (neighborCount > 3 && cell === 1) {
           newBoard[k][l] = 0
           continue
-        } else if (neighborCount < 2 && board) {
+        } else if (neighborCount < 2 && cell === 1) {
           newBoard[k][l] = 0
           continue
-        } else if (neighborCount > 1 && neighborCount < 4) {
+        } else if (neighborCount === 3 && cell === 0) {
           newBoard[k][l] = 1
           continue
-        } else if (neighborCount > 3 && board[k][l] === 0) {
+        } else if (neighborCount > 1 && neighborCount < 4 && cell === 1) {
           newBoard[k][l] = 1
           continue
         }
