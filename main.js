@@ -79,10 +79,14 @@ document.getElementById('board').addEventListener('click', (click) => {
     }
   }
   paint()
-  // TODO: Toggle clicked cell (event.target) and paint
 });
 
-document.getElementById('step_btn').addEventListener('click', (event) => {
+document.getElementById('step_btn').addEventListener('click', (click) => {
+  if (click.target.matches('#step_btn')) {
+    console.log('hit')
+    gol.tick()
+    paint()
+  }
   // TODO: Do one gol tick and paint
 });
 
