@@ -90,7 +90,7 @@ document.getElementById('play_btn').addEventListener('click', (click) => {
     setInterval(() => {
       gol.tick()
       paint()
-    }, 700);
+    }, 300);
   }
 });
 

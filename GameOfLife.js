@@ -62,6 +62,7 @@ class GameOfLife {
   livingNeighbors(r, c) {
     let count = 0
     let arr = this.board
+    // upper left
     if (!arr[r - 1] && !arr[c - 1]) {
       if (arr[r][c + 1] === 1) {
         count++
@@ -222,6 +223,7 @@ class GameOfLife {
    */
 
   tick() {
+    // makes a new board, same dimensions as first instance of board
     const newBoard = this.makeBoard();
     let board = this.board
     for (let k = 0; k < board.length; k++) {
