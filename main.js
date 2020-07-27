@@ -9,9 +9,6 @@ const gol = new GameOfLife(width, height);
  * create a table and append to the DOM
  */
 
-// Actual table cells
-const tds = [];
-
 // <table> element
 const table = document.createElement('tbody');
 // build a table row <tr>
@@ -25,7 +22,6 @@ for (let h = 0; h < height; h++) {
     // letting us fetch it in a click listener later.
     td.dataset.row = h;
     td.dataset.col = w;
-    tds.push(td);
     tr.append(td);
   }
   table.append(tr);
@@ -53,8 +49,6 @@ const paint = () => {
     })
   });
 };
-
-paint()
 
 /**
  * Event Listeners
